@@ -1,0 +1,149 @@
+{{>headerlinks}}
+
+<body>
+
+    <!-- navbar -->
+    {{>navbar}}
+
+    <div class="my-cart">
+        <div class="cart-open">
+            <div class="heading">
+                <h2>Your Shopping Cart(3)</h2>
+                <i class="fas fa-close"></i>
+            </div>
+            <div class="divide">
+
+            </div>
+            <div class="items">
+                <div class="item">
+                    <img src="./uploads/bg.jpg" alt="">
+                    <div class="details">
+                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                        <div class="price">
+                            <p>x Rs. 399</p>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="item">
+                    <img src="./uploads/bg.jpg" alt="">
+                    <div class="details">
+                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                        <div class="price">
+                            <p>x Rs. 399</p>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="item">
+                    <img src="./uploads/bg.jpg" alt="">
+                    <div class="details">
+                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                        <div class="price">
+                            <p>x Rs. 399</p>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="item">
+                    <img src="./uploads/bg.jpg" alt="">
+                    <div class="details">
+                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                        <div class="price">
+                            <p>x Rs. 399</p>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <hr>
+            </div>
+            <div class="checkout">
+                <div class="subtotal">
+                    <h4>SUB TOTAL</h4>
+                    <p>x Rs. 399</p>
+                </div>
+                <button><h2>CHECK OUT</h2></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- header -->
+    <header>
+        <div class="header">
+            <h1 class="header-title">
+                Essential <br> <span>Oils</span> <br> EASILY
+            </h1>
+        </div>
+    </header>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-aniket">
+            <div class="container-aniket">                
+                <div class="content-section">
+                    <div class="title">
+                        <h1>VedaOils - Trusted Worldwide</h1>
+                    </div>
+                    <div class="content">
+                        <h3>Site that connects Seeker to keeper !</h3>
+                        <p> VedaOils is one of the leading manufacturers, suppliers, and exporters of Natural Essential
+                            Oils & Raw ingredients. What Distinguishes Us from other Oil manufacturing units is the care
+                            and caution with which oils are composed in our state-of-the-art machinery.
+                        </p>
+                        <br>
+                        <br>
+                        <div class="button">
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                    <div class="social">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="image-section">
+                    <img src="./images/bg.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Items -->
+
+    <div class="items">
+        <h1>Collection List</h1>
+        <div class="container">
+            {{#each Oil_List}}
+                <div class="drop" style="--clr: #ff0f5b;">
+                    <div class="content">
+                        <div class="img">
+                            <img src="./images/{{this.image}}" alt="">
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, illum!</p>
+                        <a href="#">Add To Cart</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+
+    {{>footer}}
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

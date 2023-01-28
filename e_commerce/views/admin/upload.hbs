@@ -1,0 +1,27 @@
+{{>headerlinks}}
+
+<body>
+
+    {{>navbar}}
+
+    <form action="/admin/upload" method="POST" enctype="multipart/form-data" style="margin: auto; display: flex; align-items: center;">
+        <div>
+            <input type="text" name="name" placeholder="Enter Your Name" required />
+        </div>
+
+        <div>
+            <input type="file" name="file" accept="image/png, image/gif, image/jpeg" required />
+        </div>
+
+        <button type="submit" class="btn">Sign In</button>
+    </form>
+
+    {{>footer}}
+
+    <script>
+        
+    </script>
+
+</body>
+
+</html>

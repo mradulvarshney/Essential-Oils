@@ -1,0 +1,43 @@
+<nav class="navbar" id="navbar">
+        <div class="up">
+            <h2 class="navbar-logo">
+                <a href="#">VEDAS OILS</a>
+            </h2>
+
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <div class="search-card">
+                        <input type="text" id="input" class="search-input" placeholder="Essential Oils"
+                            onkeyup="searchFun()">
+                        <button class="search-button" onclick="searchFun()">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="icons">
+                <a href="#" class="icon">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="icon">
+                    <i class="fas fa-heart"><sup>0</sup></i>
+                </div>
+                <div class="icon cart">
+                    <i class="fas fa-cart-shopping"><sup>0</sup></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="down">
+            <div class="navbar-menu">
+                <a href="/">Home</a>
+                {{!-- <a href="#">Jobs</a>
+                <a href="#">Companies</a>
+                <a href="#">Sign out</a> --}}
+            </div>
+            {{!-- <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div> --}}
+        </div>
+    </nav>
