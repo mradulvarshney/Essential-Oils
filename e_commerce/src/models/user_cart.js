@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const oilSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
@@ -15,9 +15,12 @@ const oilSchema = new mongoose.Schema({
     },
     sale_price: {
         type: Number,
+    },
+    quantity: {
+        type: Number
     }
 })
 
-const Oil = new mongoose.model("Oil", oilSchema);
+const User = new mongoose.model("User", cartSchema);
 
-module.exports = Oil;
+module.exports = User;

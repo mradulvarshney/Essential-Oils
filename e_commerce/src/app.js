@@ -3,7 +3,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 require('./db/connections');
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // for user routes
 const userRoute = require('../routes/user_route');

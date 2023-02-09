@@ -15,54 +15,20 @@
 
             </div>
             <div class="items">
-                <div class="item">
-                    <img src="./uploads/bg.jpg" alt="">
-                    <div class="details">
-                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
-                        <div class="price">
-                            <p>x Rs. 399</p>
-                            <i class="fas fa-trash"></i>
+                {{#each Cart_List}}
+                    <div class="item">
+                        <img src="./images/{{this.image}}" alt="">
+                        <div class="details">
+                            <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                            <div class="price">
+                                <p>{{this.quantity}} x {{this.price}}</p>
+                                <i class="fas fa-trash"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <hr>
-                <div class="item">
-                    <img src="./uploads/bg.jpg" alt="">
-                    <div class="details">
-                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
-                        <div class="price">
-                            <p>x Rs. 399</p>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <hr>
-                <div class="item">
-                    <img src="./uploads/bg.jpg" alt="">
-                    <div class="details">
-                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
-                        <div class="price">
-                            <p>x Rs. 399</p>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <hr>
-                <div class="item">
-                    <img src="./uploads/bg.jpg" alt="">
-                    <div class="details">
-                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
-                        <div class="price">
-                            <p>x Rs. 399</p>
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <hr>
+                    <br>
+                    <hr>
+                {{/each}}
             </div>
             <div class="checkout">
                 <div class="subtotal">
@@ -130,7 +96,22 @@
                             <img src="./images/{{this.image}}" alt="">
                         </div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, illum!</p>
-                        <a href="#">Add To Cart</a>
+                        {{#if this.sale_price}}
+                            <h2>₹{{this.sale_price}}</h2>
+                            <h3 style="text-decoration: line-through;">₹{{this.price}}</h3>
+                        {{else}}
+                            <h2>₹{{this.price}}</h2>
+                        {{/if}}
+
+                        <form action="/add_to_cart" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <input type="hidden" name="name" value="{{this.name}}"> 
+                            <input type="hidden" name="image" value="{{this.image}}">
+                            <input type="hidden" name="price" value="{{this.price}}">
+                            <input type="hidden" name="sale_price" value="{{this.sale_price}}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="submit" value="Add To Cart">
+                        </form>
                     </div>
                 </div>
             {{/each}}

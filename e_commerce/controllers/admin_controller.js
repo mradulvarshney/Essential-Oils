@@ -8,7 +8,9 @@ const addItems = async(req, res) => {
     try{
         const oilData = new Oil({
             name: req.body.name,
-            image: req.file.filename
+            image: req.file.filename,
+            price: req.body.price,
+            sale_price: req.body.sale_price
         })
 
         const data = await oilData.save();  
