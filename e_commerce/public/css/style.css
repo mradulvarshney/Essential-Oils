@@ -557,3 +557,25 @@ header{
 		margin-bottom: 50px;
 	}
 }
+
+
+/* Admin Portal */
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+    margin-top: 100px;
+    margin-bottom: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px 0px;
+}
+.admin-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 80px;
+    background-color: var(--yellowColor);
+}

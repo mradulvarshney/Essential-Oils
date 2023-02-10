@@ -1,7 +1,38 @@
 const Oil = require("../src/models/add_items");
-const User = require("../src/models/user_cart")
+const User = require("../src/models/user_cart");
+var total = 0;
+var count = 0;
+
+function calculateTotal()
+{
+    User.find({}, function(err, data)
+    {
+        if(err){
+            console.log('error while loading data', err);
+            return;
+        }
+        else{
+            total = 0;
+            count = 0;
+            for(var i of data)
+            {
+                count += 1;
+                if(i.sale_price != null)
+                {
+                    total = total + i.sale_price*i.quantity;
+                }
+                else
+                {
+                    total = total + i.price*i.quantity;
+                }
+            }
+        }
+    })
+}
 
 const loadHome = (req, res) => {
+    calculateTotal();
+
     Oil.find({}, function(err, data){
         if(err){
             console.log('error while loading data', err);
@@ -12,9 +43,9 @@ const loadHome = (req, res) => {
                 if(err){
                     console.log('error while loading data', err);
                     return;
-                }
+                } 
                 else{ 
-                    return res.render('home', {Oil_List: data, Cart_List: user_data});
+                    return res.render('home', {Oil_List: data, Cart_List: user_data, total: total, count: count});
                 }
             })
             // return res.render('home', {Oil_List: data, Cart_List: cartList});
@@ -77,13 +108,57 @@ const addToCart = async(req, res) => {
         })
 
         const data = await cartData.save();  
+        
         return res.redirect('back');
     } 
     catch(e){
-        console.log("hello");
         console.log(e);
         res.send(e);
     }
 }
 
-module.exports = {loadHome, loginLoad, verifyLogin, addToCart};
+const deleteProduct = async(req, res) => {
+    try{
+        const id = req.body.id;
+
+        const data = await User.deleteOne({_id:id});  
+        
+        return res.redirect('back');
+    } 
+    catch(e){
+        console.log(e);
+        res.send(e);
+    }
+}
+
+const editQuantity = async(req, res) => {
+    try{
+        const id = req.body.id;
+        const minus = req.body.minus;
+        console.log(minus);
+        const plus = req.body.plus;
+        console.log(plus);
+        if(minus == "-"){
+            const data = await User.updateOne({_id:id},{
+                $inc : {
+                    quantity: -1
+                }
+            });
+        }
+        if(plus == "+"){
+            const data = await User.updateOne({_id:id},{
+                $inc : {
+                    'quantity' : 1
+                }
+            });
+        }
+        
+        return res.redirect('back');
+    } 
+    catch(e){
+        console.log(e);
+        res.send(e);
+    }
+}
+
+module.exports = {loadHome, loginLoad, verifyLogin, addToCart, deleteProduct, editQuantity};

@@ -36,5 +36,9 @@ user_route.post('/login', user_controller.verifyLogin);
 
 user_route.post('/add_to_cart', upload, user_controller.addToCart);
 
+user_route.post('/delete_product', user_controller.deleteProduct);
+
+user_route.post('/edit_quantity', user_controller.editQuantity);
+
 module.exports = user_route;
 

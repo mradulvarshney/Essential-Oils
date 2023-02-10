@@ -16,6 +16,7 @@ window.addEventListener("scroll", () => {
 const cart = document.querySelector(".cart");
 const mycart = document.querySelector(".my-cart");
 const cart_close = document.querySelector(".my-cart .heading i");
+const add_to_cart = document.querySelector(".add_to_cart");
 
 cart.addEventListener("click", () => {
     mycart.style.display = "flex";
@@ -24,4 +25,5 @@ cart.addEventListener("click", () => {
 cart_close.addEventListener("click", () => {
     mycart.style.display = "none";
 })
+
 

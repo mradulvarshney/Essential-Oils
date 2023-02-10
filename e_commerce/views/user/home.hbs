@@ -8,7 +8,7 @@
     <div class="my-cart">
         <div class="cart-open">
             <div class="heading">
-                <h2>Your Shopping Cart(3)</h2>
+                <h2>Your Shopping Cart({{count}})</h2>
                 <i class="fas fa-close"></i>
             </div>
             <div class="divide">
@@ -21,8 +21,27 @@
                         <div class="details">
                             <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
                             <div class="price">
-                                <p>{{this.quantity}} x {{this.price}}</p>
-                                <i class="fas fa-trash"></i>
+                                {{#if this.sale_price}}
+                                    <p><form action="edit_quantity" method="post" style="display: flex;">
+                                        <input type="hidden" name="id" value="{{this.id}}">
+                                        <input type="submit" name="minus" value="-">
+                                        <p>{{this.quantity}}</p>
+                                        <input type="submit" name="plus" value="+">
+                                    </form> x ₹ {{this.sale_price}}</p>
+                                    <p style="text-decoration: line-through;">₹{{this.price}}</p>
+                                {{else}}
+                                    <p><form action="edit_quantity" method="post" style="display: flex;">
+                                        <input type="hidden" name="id" value="{{this.id}}">
+                                        <input type="submit" name="minus" value="-">
+                                        <p>{{this.quantity}}</p>
+                                        <input type="submit" name="plus" value="+">
+                                    </form> x ₹ {{this.price}}</p>
+                                {{/if}}
+                                
+                                <form action="/delete_product" method="post">
+                                    <input type="hidden" name="id" value="{{this.id}}">
+                                    <input type="submit" value="delete" style="cursor: pointer;">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -33,7 +52,7 @@
             <div class="checkout">
                 <div class="subtotal">
                     <h4>SUB TOTAL</h4>
-                    <p>x Rs. 399</p>
+                    <p>{{total}}</p>
                 </div>
                 <button><h2>CHECK OUT</h2></button>
             </div>
@@ -110,7 +129,7 @@
                             <input type="hidden" name="price" value="{{this.price}}">
                             <input type="hidden" name="sale_price" value="{{this.sale_price}}">
                             <input type="hidden" name="quantity" value="1">
-                            <input type="submit" value="Add To Cart">
+                            <input type="submit" value="Add To Cart" class="add_to_cart">
                         </form>
                     </div>
                 </div>
@@ -125,6 +144,5 @@
     {{>footer}}
 
     <script src="./js/script.js"></script>
-</body>
 
-</html>
+</body>
