@@ -42,7 +42,7 @@ const loadAdmin = async (req, res) => {
                         disabled: "disabled"
                     });
                 }
-                return res.redirect('../login');
+                return res.redirect('../');
             }
             calculateTotal(cart, req);
             if (user.is_admin == 1) {
@@ -51,10 +51,12 @@ const loadAdmin = async (req, res) => {
                     total: total,
                     count: count,
                     logout: user.name.toUpperCase(),
-                    isAdmin: "Admin"
+                    isAdmin: "Admin",
+                    a: "a",
+                    checkout: "/checkout"
                 });
             }
-            return res.redirect('../login');
+            return res.redirect('../');
         }
         else {
             return res.redirect('../login');
@@ -67,19 +69,41 @@ const loadAdmin = async (req, res) => {
 
 const getUpload = async (req, res) => {
     const token = req.cookies.jwt;
-    if(token == undefined){
+    if (token == undefined) {
         return res.redirect('../login');
     }
-    if(token != undefined){
+    if (token != undefined) {
         const verifyUser = jwt.verify(token, process.env.SECRET_KEY);
 
         const user = await User.findOne({ _id: verifyUser._id });
-
-        if(user.is_admin == 1)
-        {
-            return res.render('upload');
+        var cart = req.session.cart;
+        if (cart == undefined || cart.length == 0) {
+            if (user.is_admin == 1) {
+                return res.render('upload', {
+                    Cart_List: cart,
+                    total: total,
+                    count: count,
+                    logout: user.name.toUpperCase(),
+                    isAdmin: "Admin",
+                    a: "div",
+                    disabled: "disabled"
+                });
+            }
+            return res.redirect('../');
         }
-        return res.redirect('../login');
+        calculateTotal(cart, req);
+        if (user.is_admin == 1) {
+            return res.render('upload', {
+                Cart_List: cart,
+                total: total,
+                count: count,
+                logout: user.name.toUpperCase(),
+                isAdmin: "Admin",
+                a: "a",
+                checkout: "/checkout"
+            });
+        }
+        return res.redirect('../');
     }
 }
 
@@ -129,7 +153,7 @@ const addItem = async (req, res) => {
                 return;
             }
             else {
-                res.redirect('../editDelete');
+                res.redirect('./editDelete');
             }
         })
     }
@@ -138,17 +162,51 @@ const addItem = async (req, res) => {
     }
 }
 
-const editDelete = async (req, res) => {
+const editDelete = (req, res) => {
     try {
-        Oil.find({}, function (err, data) {
+        Oil.find({}, async function (err, data) {
             if (err) {
                 console.log('error while loading data', err);
                 return;
             }
-            else {
-                res.render('editDelete', {
-                    Oil_List: data
-                });
+            const token = req.cookies.jwt;
+            if (token == undefined) {
+                return res.redirect('../login');
+            }
+            if (token != undefined) {
+                const verifyUser = jwt.verify(token, process.env.SECRET_KEY);
+
+                const user = await User.findOne({ _id: verifyUser._id });
+                var cart = req.session.cart;
+                if (cart == undefined || cart.length == 0) {
+                    if (user.is_admin == 1) {
+                        return res.render('editDelete', {
+                            Oil_List: data,
+                            Cart_List: cart,
+                            total: total,
+                            count: count,
+                            logout: user.name.toUpperCase(),
+                            isAdmin: "Admin",
+                            a: "div",
+                            disabled: "disabled"
+                        });
+                    }
+                    return res.redirect('../');
+                }
+                calculateTotal(cart, req);
+                if (user.is_admin == 1) {
+                    return res.render('editDelete', {
+                        Oil_List: data,
+                        Cart_List: cart,
+                        total: total,
+                        count: count,
+                        logout: user.name.toUpperCase(),
+                        isAdmin: "Admin",
+                        a: "a",
+                        checkout: "/checkout"
+                    });
+                }
+                return res.redirect('../');
             }
         })
     }

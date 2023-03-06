@@ -1,10 +1,14 @@
 {{>headerlinks}}
 
 <body>
-    {{>navbar}}
+    {{>adminnavbar}} 
+
+    <div style="display: flex; justify-content: center; margin-top:8%">
+        <a href="/admin/editDelete" class="btn btn-primary">Edit / Delete</a>
+    </div>
 
     <form action="/admin/upload" method="POST" enctype="multipart/form-data">
-        <div style="margin:10%; width: 80%; border: 1px solid black">
+        <div style="margin: 1% auto; width: 80%; border: 1px solid black">
             <!-- Form Name -->
             <legend style="display: flex; justify-content: center; margin: 30px">ADD PRODUCTS</legend>
             <h5 style="text-align: center; color: red;">{{exist}}</h5>
