@@ -328,11 +328,12 @@ const deleteProduct = async (req, res) => {
         const id = req.body.id;
         var cart = req.session.cart;
 
+
         for(let i=0; i<cart.length; i++)
         {
             if(cart[i].id == id)
             {
-                cart.splice(cart.indexOf(i),1);
+                cart.splice(i,1);
             }
         }
 
@@ -371,9 +372,14 @@ const editQuantity = async (req, res) => {
             {
                 if(cart[i].id == id)
                 {
+                    console.log(cart[i].quantity);
                     if(cart[i].quantity > 1)
                     {
                         cart[i].quantity = parseInt(cart[i].quantity)-1;
+                    }
+                    else if(cart[i].quantity == 1)
+                    {
+                        cart.splice(i,1);
                     }
                 }
             }
