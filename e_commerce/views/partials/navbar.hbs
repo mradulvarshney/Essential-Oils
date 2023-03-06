@@ -1,44 +1,104 @@
-<nav class="navbar" id="navbar">
-        <div class="up">
-            <h2 class="navbar-logo">
-                <a href="#">VEDAS OILS</a>
-            </h2>
+<header class="header" id="navu">
 
-            <div class="search-wrapper">
-                <div class="search-box">
-                    <div class="search-card">
-                        <input type="text" id="input" class="search-input" placeholder="Essential Oils"
-                            onkeyup="searchFun()">
-                        <button class="search-button" onclick="searchFun()">Search</button>
+    <h1 class="logo">
+        <a href="/">VEDAS OILS</a>
+    </h1>
+
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Bulk Order</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="/admin">{{isAdmin}}</a>
+    </nav>
+
+    <div class="icons">
+        <div class="login" style="background-color: white; display: flex; align-items: center">
+            <a href="login" style="font-weight: 500;">{{login}}</a>
+        </div>
+        <div class="login" style="background-color: white; display: flex; align-items: center">
+            <a href="register" style="font-weight: 500;">{{register}}</a>
+        </div>
+        <div class="login" style="background-color: white; display: flex; align-items: center">
+            <a href="logout" style="font-weight: 500;">{{logout}}</a>
+        </div>
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="icon">
+            <i class="fas fa-heart"><sup>0</sup></i>
+        </div>
+        <div class="cart">
+            <i class="fas fa-cart-shopping"><sup>{{count}}</sup></i>
+        </div>
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </div>
+
+    <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </div>
+</header>
+
+<div class="my-cart">
+    <div class="cart-open">
+        <div class="heading">
+            <h4>Your Shopping Cart({{count}})</h4>
+            <i class="fas fa-close"></i>
+        </div>
+        <div class="divide">
+
+        </div>
+        <div class="items">
+            {{#each Cart_List}}
+            <div class="item">
+                <div class="img">
+                    <img src="./images/{{this.image}}" alt="">
+                </div>
+                <div class="details">
+                    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt</p>
+                    <div class="price">
+                        {{#if this.sale_price}}
+                        <p>
+                        <form action="edit_quantity" method="post">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <input type="submit" name="minus" value="-">
+                            <p>{{this.quantity}}</p>
+                            <input type="submit" name="plus" value="+">
+                        </form> x ₹ {{this.sale_price}}</p>
+                        <p style="text-decoration: line-through;">₹{{this.price}}</p>
+                        {{else}}
+                        <p>
+                        <form action="edit_quantity" method="post">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <input type="submit" name="minus" value="-">
+                            <p>{{this.quantity}}</p>
+                            <input type="submit" name="plus" value="+">
+                        </form> x ₹ {{this.price}}</p>
+                        {{/if}}
+
+                        <form action="/delete_product" method="post">
+                            <input type="hidden" name="id" value="{{this.id}}">
+                            <input type="submit" value="delete" style="cursor: pointer;">
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <div class="icons">
-            
-                <a href="/login" class="icon">
-                    <i class="fas fa-user"></i>
-                </a>
-                <div class="icon">
-                    <i class="fas fa-heart"><sup>0</sup></i>
-                </div>
-                <div class="icon cart">
-                    <i class="fas fa-cart-shopping"><sup>{{count}}</sup></i>
-                </div>
-            </div>
+            <br>
+            <hr>
+            {{/each}}
         </div>
-
-        <div class="down">
-            <div class="navbar-menu">
-                <a href="/">Home</a>
-                {{!-- <a href="#">Jobs</a>
-                <a href="#">Companies</a>
-                <a href="#">Sign out</a> --}}
+        <div class="checkout">
+            <div class="subtotal">
+                <h4>SUB TOTAL</h4>
+                <p>₹ {{total}}</p>
             </div>
-            {{!-- <div class="menu-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div> --}}
+            <button class="btn btn-primary" {{disabled}}> 
+                <{{a}} href="{{checkout}}" style="text-decoration: none;">
+                    <h2 style="color: white">
+                        CHECK OUT
+                    </h2>
+                </{{a}}>
+            </button>
         </div>
-    </nav>
+    </div>
+</div>

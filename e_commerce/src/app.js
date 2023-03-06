@@ -1,3 +1,4 @@
+require('dotenv').config();
 const port = 5000;
 const path = require('path');
 const express = require('express');
@@ -7,9 +8,19 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 const hbs = require('hbs');
 const staticPath = path.join(__dirname, "../public");
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const auth = require("./middleware/auth");
+const session = require('express-session');
+
+//registering inc operator for {{@index}}
+hbs.registerHelper("inc", function(value)
+{
+    return parseInt(value) + 1;
+});
 
 app.use(express.static(staticPath));
-
+app.use(session({secret:"secret"}));
 app.set("view engine", "hbs");
 app.set('views', path.join(__dirname, '../views/admin'));
 hbs.registerPartials(path.join(__dirname, "../views/partials"));
@@ -19,10 +30,6 @@ hbs.registerPartials(path.join(__dirname, "../views/partials"));
 const userRoute = require('../routes/user_route');
 app.use('/', userRoute);
 
-// for admin routes
-app.get('/admin', (req, res) => {
-    res.render('admin');
-})
 const adminRoute = require('../routes/admin_route');
 app.use('/admin', adminRoute);
 

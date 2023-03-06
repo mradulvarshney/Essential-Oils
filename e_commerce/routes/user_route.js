@@ -2,6 +2,7 @@ const express = require('express');
 const user_route = express();
 const path = require('path');
 const hbs = require('hbs');
+const auth = require("../src/middleware/auth")
 const staticPath = path.join(__dirname, "../public");
 
 user_route.use(express.static(staticPath));
@@ -34,11 +35,23 @@ user_route.get('/login', user_controller.loginLoad);
 // getting the user data from form
 user_route.post('/login', user_controller.verifyLogin);
 
+user_route.get('/register', user_controller.registerLoad);
+
+// getting the user data from form
+user_route.post('/register', user_controller.insertUser);
+
+user_route.get('/verify', user_controller.verifyMail);
+
 user_route.post('/add_to_cart', upload, user_controller.addToCart);
 
 user_route.post('/delete_product', user_controller.deleteProduct);
 
 user_route.post('/edit_quantity', user_controller.editQuantity);
+
+user_route.get('/logout', auth, user_controller.logoutUser);
+
+user_route.get('/checkout', user_controller.checkout);
+
 
 module.exports = user_route;
 

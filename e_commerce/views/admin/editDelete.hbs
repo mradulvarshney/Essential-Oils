@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oils</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        table{
+            margin: 1% 5%;
+        }
+        table, th, td {
+            border:1px solid black;
+            padding: 7px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    {{>navbar}}
+
+    <div style="display: flex; justify-content: center; margin-top:8%">
+        <a href="/admin/upload" class="btn btn-primary">Add More Items</a>
+    </div>
+    <table>
+        <thead>
+            <th>Sr. No.</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Botanical Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Discount %</th>
+            <th>Sale Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </thead>
+
+        {{#each Oil_List}}
+            <tbody>
+                <td>{{inc @index}}.</td>
+                <td>{{this.code}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.botname}}</td>
+                <td>{{this.size}} ml</td>
+                <td>{{this.quantity}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.discount}}</td>
+                <td>{{this.sale_price}}</td>
+                <td> 
+                    <form action="/admin/edit/{{this.id}}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" value="{{this.id}}" name="id">
+                        <input type="submit" value="Edit" class="btn btn-info">
+                    </form>
+                </td>
+                <td>
+                    <form action="/admin/delete" method="post">
+                        <input type="hidden" value="{{this.id}}" name="id">
+                        <input type="submit" value="Delete" class="btn btn-primary">
+                    </form>
+                </td>
+            </tbody>
+        {{/each}}
+    </table>
+    {{>footer}}
+    <script src="./js/script.js"></script>
+</body>

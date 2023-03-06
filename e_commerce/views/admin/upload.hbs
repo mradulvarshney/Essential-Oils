@@ -1,34 +1,114 @@
 {{>headerlinks}}
 
 <body>
-
     {{>navbar}}
 
-    <form action="/admin/upload" method="POST" enctype="multipart/form-data" style="margin: auto; display: flex; align-items: center;">
-        <div>
-            <input type="text" name="name" placeholder="Enter Your Name" required />
-        </div>
+    <form action="/admin/upload" method="POST" enctype="multipart/form-data">
+        <div style="margin:10%; width: 80%; border: 1px solid black">
+            <!-- Form Name -->
+            <legend style="display: flex; justify-content: center; margin: 30px">ADD PRODUCTS</legend>
+            <h5 style="text-align: center; color: red;">{{exist}}</h5>
 
-        <div>
-            <input type="file" name="file" accept="image/png, image/gif, image/jpeg" required />
-        </div>
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">PRODUCT CODE</label>
+                <div class="col-md-6">
+                    <input style="text-transform: uppercase;" name="code" placeholder="PRODUCT CODE"
+                        class="form-control input-md" required type="text" value="{{code}}">
+                </div>
+            </div>
 
-        <div>
-            <input type="text" name="price" placeholder="Enter price" required />
-        </div>
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">PRODUCT NAME</label>
+                <div class="col-md-6">
+                    <input name="name" placeholder="PRODUCT NAME" class="form-control input-md" required="" 
+                        type="text" value="{{name}}">
 
-        <div>
-            <input type="text" name="sale_price" placeholder="Enter sale price" required />
-        </div>
+                </div>
+            </div>
 
-        <button type="submit" class="btn">Sign In</button>
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">BOTANICAL NAME</label>
+                <div class="col-md-6">
+                    <input name="botname" placeholder="BOTANICAL NAME" class="form-control input-md" required=""
+                        type="text" value="{{botname}}">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">PRODUCT SIZE</label>
+                <div class="col-md-6">
+                    <input name="size" placeholder="PRODUCT SIZE" class="form-control input-md" required=""
+                        type="number" value="{{size}}">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">QUANTITY</label>
+                <div class="col-md-6">
+                    <input name="quantity" placeholder="PRODUCT QUANTITY" class="form-control input-md" required=""
+                        type="number" value="{{quantity}}">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">PRODUCT PRICE</label>
+                <div class="col-md-6">
+                    <input name="price" placeholder="PRODUCT PRICE" class="form-control input-md" required=""
+                        type="number" value="{{price}}">
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">DISCOUNT</label>
+                <div class="col-md-6">
+                    <input name="discount" placeholder="DISCOUNT" class="form-control input-md" 
+                        type="number" value="{{discount}}">
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group" style="display: flex;">
+                <label class="col-md-4 control-label">PRODUCT SALE PRICE</label>
+                <div class="col-md-6">
+                    <input name="sale_price" placeholder="PRODUCT SALE PRICE" class="form-control input-md"
+                        type="number" value="{{sale_price}}">
+                </div>
+            </div>
+
+            <!-- File Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">IMAGE</label>
+                <div class="col-md-4" style="margin: auto;">
+                    <input name="file" class="input-file" type="file" accept="image/png, image/gif, image/jpeg"
+                        value="{{image}}">
+                </div>
+            </div>
+
+            <input type="hidden" name="id" value="{{id}}">
+
+            <!-- Button -->
+            <div class="form-group">
+                <div class="col-md-2" style="margin: auto;">
+                    <button type="submit" class="btn">Upload</button>
+                </div>
+            </div>
+        </div>
     </form>
+
 
     {{>footer}}
 
-    <script>
-        
-    </script>
+    <script src="./js/script.js"></script>
 
 </body>
 

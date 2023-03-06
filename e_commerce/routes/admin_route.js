@@ -2,7 +2,7 @@ const express = require('express');
 const admin_route = express();
 const hbs = require('hbs');
 const path = require('path');
-const staticPath = path.join(__dirname, "../public");
+const staticPath = path.join(__dirname, "../public"); 
 
 admin_route.use(express.static(staticPath));
 
@@ -26,7 +26,14 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage}).single('file');
 
 const admin_controller = require('../controllers/admin_controller');
+admin_route.get('/', admin_controller.loadAdmin);
+
 admin_route.get('/upload', admin_controller.getUpload);
-admin_route.post('/upload', upload, admin_controller.addItems);
+admin_route.post('/upload', upload, admin_controller.addItem);
+
+admin_route.get('/editDelete', admin_controller.editDelete);
+admin_route.post('/edit/:id', upload, admin_controller.editItem);
+
+admin_route.post('/delete', admin_controller.deleteItem);
 
 module.exports = admin_route;

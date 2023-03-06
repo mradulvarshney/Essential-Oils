@@ -1,20 +1,33 @@
 const mongoose = require('mongoose');
 
-const oilSchema = new mongoose.Schema({
-    name:{
+const oilSchema = new mongoose.Schema({ 
+    code: {
         type: String,
-        required: true
+        unique: true
     },
-    image:{
-        type: String,
-        required: true
-    }, 
+    name:{
+        type: String
+    },
+    botname:{
+        type: String
+    },
+    size: {
+        type: Number
+    },
+    quantity: {
+        type: Number
+    },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     sale_price: {
         type: Number,
+    },
+    discount: {
+        type: Number
+    },
+    image:{
+        type: String
     }
 })
 

@@ -1,7 +1,7 @@
 // navbar scroll
 
 window.addEventListener("scroll", () => {
-    var navbar = document.getElementById("navbar");
+    var navbar = document.getElementById("navu");
     var height = window.scrollY;
     if(height >80){
         navbar.style.background = "rgb(225 217 217 / 100%)";
@@ -16,7 +16,6 @@ window.addEventListener("scroll", () => {
 const cart = document.querySelector(".cart");
 const mycart = document.querySelector(".my-cart");
 const cart_close = document.querySelector(".my-cart .heading i");
-const add_to_cart = document.querySelector(".add_to_cart");
 
 cart.addEventListener("click", () => {
     mycart.style.display = "flex";
@@ -27,3 +26,16 @@ cart_close.addEventListener("click", () => {
 })
 
 
+let searchForm = document.querySelector('.search-form');
+
+document.querySelector('#search-btn').onclick = () =>{
+    searchForm.classList.toggle('active');
+    navbar.classList.remove('active');
+}
+
+let navbar = document.querySelector('.navbar');
+
+document.querySelector('#menu-btn').onclick = () =>{
+    navbar.classList.toggle('active');
+    searchForm.classList.remove('active');
+}
