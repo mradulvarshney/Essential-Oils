@@ -14,7 +14,12 @@ const loadHome = (req, res) => {
             return;
         }
         else {
+            data.sort((a,b) => b.quantity - a.quantity);
             var cart = req.session.cart;
+            if(cart != undefined)
+            {
+                calculateTotal(cart, req);
+            }
             const token = req.cookies.jwt;
             if(token!=undefined)
             {
@@ -168,7 +173,7 @@ const sendVerifyMail = async(name, email, user_id) => {
             port: 587,
             secure: false,
             requireTLS: true,
-            auth: {
+            auth: { 
                 user: "mradulv26@gmail.com",
                 pass: "hggphcbenjifftgf"
             }
@@ -224,7 +229,6 @@ const insertUser = async (req, res) => {
 
 const verifyMail = async(req, res) => {
     try {
-        console.log(req.query.id);
         const updatedInfo =  await User.updateOne({
             _id: req.query.id,
         },
@@ -270,7 +274,6 @@ function calculateTotal(cart, req)
             total += cart[i].price * cart[i].quantity;
         }
     }
-
     req.session.total = total;
     return total;
 }
@@ -372,7 +375,6 @@ const editQuantity = async (req, res) => {
             {
                 if(cart[i].id == id)
                 {
-                    console.log(cart[i].quantity);
                     if(cart[i].quantity > 1)
                     {
                         cart[i].quantity = parseInt(cart[i].quantity)-1;
@@ -417,7 +419,6 @@ const checkout = async (req, res) => {
             const user = await User.findOne({ _id: verifyUser._id });
 
             var cart = req.session.cart;
-            console.log(cart);
             if(cart == undefined || cart.length == 0)
             {
                 res.redirect('/');

@@ -23,14 +23,14 @@
         </div>
     </header>
 
-    <div style="padding:40px">
-        <div class="row" style="margin-top: 7%;">
-            <div class="col-md-8 mb-4">
-                <div class="card mb-4">
-                    <div class="card-header py-3">
-                        <h5 class="mb-0">Biling details</h5>
-                    </div>
-                    <div class="card-body">
+        <div style="padding:40px">
+            <div class="row" style="margin-top: 7%;">
+                <div class="col-md-8 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="mb-0">Biling details</h5>
+                        </div>
+                        <div class="card-body">
                         <form>
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row mb-4">
@@ -57,19 +57,19 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="number" id="form7Example1" class="form-control" />
+                                        <input type="number" id="form7Example1" class="form-control" name="pincode" value=""/>
                                         <label class="form-label" for="form7Example1">Pincode</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="form7Example1" class="form-control" />
+                                        <input type="text" id="form7Example1" class="form-control" name="city" value=""/>
                                         <label class="form-label" for="form7Example1">City</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="form7Example2" class="form-control" />
+                                        <input type="text" id="form7Example2" class="form-control" name="state" value=""/>
                                         <label class="form-label" for="form7Example2">State</label>
                                     </div>
                                 </div>
@@ -87,77 +87,77 @@
                                 <label class="form-label" for="form7Example6">Phone</label>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card mb-4">
-                    <div class="bill">
-                        <div class="checkout-my-cart">
-                            <div class="cart-open">
-                                <div class="items">
-                                    {{#each Cart_List}}
-                                    <div class="item">
-                                        <div class="img">
-                                            <img src="./images/{{this.image}}" alt="">
-                                        </div>
-                                        <div class="details">
+                <div class="col-md-4 mb-4">
+                    <div class="card mb-4">
+                        <div class="bill">
+                            <div class="checkout-my-cart">
+                                <div class="cart-open">
+                                    <div class="items">
+                                        {{#each Cart_List}}
+                                        <div class="item">
+                                            <div class="img">
+                                                <img src="./images/{{this.image}}" alt="">
+                                            </div>
+                                            <div class="details">
                                             <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt
-                                            </p>
-                                            <div class="price">
-                                                {{#if this.sale_price}}
-                                                <p>
-                                                <p>{{this.quantity}}</p> x ₹ {{this.sale_price}}</p>
-                                                <p style="text-decoration: line-through;">₹{{this.price}}</p>
-                                                {{else}}
-                                                <p>
-                                                <p>{{this.quantity}}</p> x ₹ {{this.price}}</p>
-                                                {{/if}}
+                                                </p>
+                                                <div class="price">
+                                                    {{#if this.sale_price}}
+                                                    <p>
+                                                    <p>{{this.quantity}}</p> x ₹ {{this.sale_price}}</p>
+                                                    <p style="text-decoration: line-through;">₹{{this.price}}</p>
+                                                    {{else}}
+                                                    <p>
+                                                    <p>{{this.quantity}}</p> x ₹ {{this.price}}</p>
+                                                    {{/if}}
+                                                </div>
                                             </div>
                                         </div>
+                                        <hr>
+                                        {{/each}}
                                     </div>
-                                    <hr>
-                                    {{/each}}
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card-header py-3">
-                        <h5 class="mb-0">Summary</h5>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li
-                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                Products ({{count}} x items)
-                                <span>₹ {{total}}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                Delivery Charge
-                                <span>FREE</span>
-                            </li>
-                            <li
-                                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                <div>
-                                    <strong>Total amount</strong>
-                                    <strong>
-                                        <p class="mb-0">(including VAT)</p>
-                                    </strong>
-                                </div>
-                                <span><strong>₹ {{total}}</strong></span>
-                            </li>
-                        </ul>
+                        <div class="card-header py-3">
+                            <h5 class="mb-0">Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                    Products ({{count}} x items)
+                                    <span>₹ {{total}}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    Delivery Charge
+                                    <span>FREE</span>
+                                </li>
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <div>
+                                        <strong>Total amount</strong>
+                                        <strong>
+                                            <p class="mb-0">(including VAT)</p>
+                                        </strong>
+                                    </div>
+                                    <span><strong>₹ {{total}}</strong></span>
+                                </li>
+                            </ul>
 
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                            Make purchase
-                        </button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                Pay Now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     {{>footer}}
 

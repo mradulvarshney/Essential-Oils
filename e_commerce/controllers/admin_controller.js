@@ -5,6 +5,27 @@ const User = require("../src/models/registerModel");
 var total = 0;
 var count = 0;
 
+var mydata ;
+
+function session(cart, data)
+{
+    for(let i=0; i<cart.length; i++)
+    {
+        for(let j=0; j<data.length; j++)
+        {
+            if(data[j].id == cart[i].id)
+            {
+                cart[i].name = data[j].name;
+                cart[i].image = data[j].image;
+                cart[i].price = data[j].price;
+                cart[i].sale_price = data[j].sale_price;
+                break;
+            }
+        }
+    }
+    return cart;
+}
+
 function calculateTotal(cart, req) {
     total = 0;
     count = 0;
@@ -30,6 +51,7 @@ const loadAdmin = async (req, res) => {
 
             const user = await User.findOne({ _id: verifyUser._id });
             var cart = req.session.cart;
+            
             if (cart == undefined || cart.length == 0) {
                 if (user.is_admin == 1) {
                     return res.render('admin', {
@@ -161,7 +183,7 @@ const addItem = async (req, res) => {
         res.send(e);
     }
 }
-
+ 
 const editDelete = (req, res) => {
     try {
         Oil.find({}, async function (err, data) {
@@ -177,7 +199,13 @@ const editDelete = (req, res) => {
                 const verifyUser = jwt.verify(token, process.env.SECRET_KEY);
 
                 const user = await User.findOne({ _id: verifyUser._id });
+                mydata = data;
                 var cart = req.session.cart;
+                if(cart != undefined)
+                {
+                    cart = session(cart, data);
+                    calculateTotal(cart, req);
+                }
                 if (cart == undefined || cart.length == 0) {
                     if (user.is_admin == 1) {
                         return res.render('editDelete', {

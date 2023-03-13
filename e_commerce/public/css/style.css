@@ -349,11 +349,30 @@ html::-webkit-scrollbar-thumb{
     height: 90vh;
     background: url("../uploads/bg.jpg") no-repeat center/cover;
 }
+.home .prev{
+    position: absolute;
+    top: 40%;
+    left: 1%;
+    padding: 20px;
+    font-size: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.home .next{
+    position: absolute;
+    top: 40%;
+    right: 1%;
+    padding: 20px;
+    font-size: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
 .header-title {
     position: relative;
     top: 13rem;
-    margin-left: 3rem;
+    margin-left: 10rem;
     letter-spacing: 3;
     font-weight: bolder;
     font-size: 52px;

@@ -8,9 +8,11 @@
     <!-- header -->
     <header class="startup">
         <div class="home">
+            <button onclick="prevImage()" class="prev"><</button>
             <h1 class="header-title">
                 Essential <br> <span>Oils</span> <br> EASILY
             </h1>
+            <button onclick="nextImage()" class="next">></button>
         </div>
     </header>
 
@@ -83,7 +85,11 @@
                             <input type="hidden" name="price" value="{{this.price}}">
                             <input type="hidden" name="sale_price" value="{{this.sale_price}}">
                             <input type="hidden" name="quantity" value="1">
+                            {{#if this.quantity}}
                             <button type="submit" class="btn btn-primary">Add To Cart</button>
+                            {{else}}
+                            <button type="submit" class="btn btn-primary" disabled>Out Of Stock</button>
+                            {{/if}}
                         </form>
                     </div>
                 </div>
